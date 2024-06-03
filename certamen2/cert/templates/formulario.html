@@ -1,0 +1,14 @@
+
+<form action="{% url 'nuevo_proyecto' %}" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="txtNombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="txtNombre" name="txtNombre">
+    </div>
+    <div class="mb-3">
+        <label for="txtTema" class="form-label">Tema</label>
+        <input type="text" class="form-control" id="txtTema" name="txtTema">
+    </div>
+        <input class="btn btn-primary" type="submit" value="Enviar">
+
+</form>

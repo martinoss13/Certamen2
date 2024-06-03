@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+  <div class="contenedor">
+    <img src="{% static 'certamen2/img/svm.jpg' %}" alt="Fondo">
+    <div class="texto-superpuesto">
+      <h1>Portal de Iniciativas Estudiantiles</h1>
+      <h3>Universidad Santa Maria - Sede Viña del Mar</h3>
+    </div>
+  </div>
+
+  <section id="tabla">
+    <h2>Proyectos Presentados</h2>
+    {% if estalogueado %}
+    <a href="nuevo_proyecto/">Agregar Proyecto</a>
+    {% endif %}
+    <input type="checkbox" name="filtro" id="filtro" {% if request.GET.filtro == 'on' %}checked{% endif %}>
+    <label for="filtro">No Patrocinados</label>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nombre Proyecto</th>
+          <th scope="col">Estudiante</th>
+          <th scope="col">Tema</th>
+          <th scope="col">Profesor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for proyecto in proyectos %}
+        <tr>
+          <td>{{ proyecto.nombre }}</td>
+          <td>{{ proyecto.estudiante }}</td>
+          <td>{{ proyecto.tema }}</td>
+          <td>{{ proyecto.profesor_patrocinador }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Iniciar Sesion</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <section id="iniciosesion" class="form-login">
+    <h5>Iniciar Sesion</h5>
+    <form method="post">
+      {% csrf_token %}
+      <input id="username" class="controls" type="text" name="username" value="" placeholder="Usuario">
+      <input id="password" class="controls" type="password" name="password" value="" placeholder="Contraseña">
+      <input class="buttons" type="submit" name="" value="Ingresar">
+    </form>
+  </section>
+<script src="{% static 'certamen2/js/main.js' %}"></script>
+</body>
+</html>
+{% endblock %}
